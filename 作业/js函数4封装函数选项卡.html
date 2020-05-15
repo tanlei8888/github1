@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 300px;
+            background-color: skyblue;
+            margin: auto;
+            position: relative;
+        }
+        .container div{
+            width: 300px;
+            height: 250px;
+            margin-top: 20px;
+            background-color: yellow;
+            display: none;
+        }
+        .container .display{
+            display: block;
+        }
+        input{
+            font-size: 20px;
+        }
+        .container .dd{
+            background-color: yellow;
+        }
+        .next,.prev{
+            position: absolute;
+            font-size: 30px;
+            top: 48px;
+            cursor: pointer;
+            text-align: center;
+            width: 50px;
+            height: 250px;
+            line-height: 250px;
+            background-color: rgba(0, 0 ,0, .3);
+        }
+        .next{
+            right:0;
+        }
+        .prev{
+            left: 0;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div id="container" class="container">
+        <input type="button" value="1" class="dd">
+        <input type="button" value="2">
+        <input type="button" value="3">
+        <div class="display" >11111111111111</div>
+        <div>222222222222</div>
+        <div>3333333333</div>
+        <span class="prev" id="prev">&lt;</span>
+        <span class="next" id="next">&gt;</span>
+    </div>
+</body>
+<script>
+    let oDiv = document.getElementById("container")
+    let oInput = oDiv.getElementsByTagName("input")
+    let aDiv = oDiv.getElementsByTagName("div")
+    let oNext = document.getElementById("next")
+    let oPrev = document.getElementById("prev")
+    let now = 0;
+    
+    init()
+
+    // 初始化函数
+    function init(){
+        for( let i = 0; i < oInput.length; i++){
+        oInput[i].onclick = function(){
+            change(i)
+            draw(now)
+            }
+        }
+        oNext.onclick = function(){
+            now = (now === oInput.length-1) ? 0 : now + 1;
+            draw(now)
+        }
+        oPrev.onclick = function(){
+            now = (now === 0) ? oInput.length-1 : now - 1;
+            draw(now)
+        }
+    }
+    
+
+    // 绑定传参逻辑
+    function change(cc){
+        now = cc
+    }
+
+
+    // 绑定渲染
+    function draw(index){
+        for( let i = 0; i < oInput.length; i++){
+            oInput[i].className = "";
+            aDiv[i].className = "";
+        }
+            oInput[index].className = "dd";
+            aDiv[index].className = "display";
+    }
+
+
+
+
+
+
+
+
+
+    // for( let i = 0; i < oInput.length; i++){
+    //     oInput[i].onclick = function(){
+    //         for(let j = 0; j < oInput.length; j++){
+    //             oInput[j].className = "";
+    //             aDiv[j].className = "";
+    //         }
+    //         oInput[i].className = "dd";
+    //         aDiv[i].className = "display";
+    //     }
+    // }
+   
+    // oNext.onclick = function(){
+    //     for(let i = 0; i < oInput.length; i++){
+    //        if(oInput[i].className === "dd" ){
+    //         oInput[i].className = "";
+    //         aDiv[i].className = "";
+    //         i = (i === oInput.length-1) ? 0 : i + 1
+    //         oInput[i].className = "dd";
+    //         aDiv[i].className = "display";
+    //        }
+           
+    //     }
+       
+    // }
+    // oPrev.onclick = function(){
+    //     for(let i = 0; i < oInput.length; i++){
+    //         if(oInput[i].className === "dd" ){
+    //         oInput[i].className = "";
+    //         aDiv[i].className = "";
+    //         i = (i === 0) ? oInput.length-1 : i - 1
+    //         oInput[i].className = "dd";
+    //         aDiv[i].className = "display";
+    //        }
+    //     }
+    // }
+</script>
+</html>

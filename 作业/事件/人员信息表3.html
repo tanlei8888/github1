@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2{
+            width: 200px;
+            margin: auto;
+        }
+        table{
+            border: 1px solid black;
+            width: 600px;
+            margin: auto;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        td,th{
+            width: 150px;
+            border: 1px solid black;
+        }
+        a{
+            text-decoration: none;
+        }
+        #idcare{
+            width: 300px;
+            margin: auto;
+            margin-top: 50px;
+            border: 4px solid green;
+            text-align: center;
+        }
+        #div2{
+            background-color: blue;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <p><h2>人员信息表</h2></p>
+    <table id="tbl">
+        <tr id="TR">
+            <th>姓名&#8595;  &#8593;</th>
+            <th>年龄</th>
+            <th>薪资</th>
+            <th>操作</th>
+        </tr>
+       
+    </table>
+        <div id="idcare">
+            <p id="p1">新增人员信息</p>
+            姓名:<input type="text" name="" id="name">
+            <br />
+            <br />
+            年龄:<input type="text" name="" id="age">
+            <br />
+            <br />
+            薪资:<input type="text" name="" id="wages">
+            <br />
+            <br />
+            <input type="button" name="" id="increase" value="新增">
+        </div>
+</body>
+<script>
+    //绑定table
+    let oTbl = document.getElementById("tbl");
+    //绑定点击事件
+    let oBtn = document.getElementById("increase")
+    
+
+    //点击增加新人员信息
+    oBtn.addEventListener("click",function(){
+        zenjia();
+    })
+
+    //添加函数
+    function zenjia(){
+        //获取三个文本框的文本
+        let nAme = document.getElementById("name").value;
+        let aGe = document.getElementById("age").value;
+        let wAges = document.getElementById("wages").value;
+        //创建一个新tr
+        let Tr = document.createElement("tr");
+        //姓名td
+        let nameTd = document.createElement("td");
+        let nameText = document.createTextNode(nAme);
+        nameTd.appendChild(nameText);
+        //年龄td
+        let ageTd = document.createElement("td");
+        let ageText  = document.createTextNode(aGe);
+        ageTd.appendChild(ageText);
+        //薪资td
+        let wagesTd = document.createElement("td");
+        let wagesText = document.createTextNode(wAges);
+        wagesTd.appendChild(wagesText);
+        //修改删除td
+        let aTd = document.createElement("td");
+        let obut = document.createElement("input");
+        let obut1 = document.createElement("input");   
+        //删除当前tr
+        obut.type = "button";
+        obut.value = "删除";
+        obut.style.width = "50px";
+        obut.style.marginRight = "-1px";
+        obut.addEventListener("click",function(){
+            oTbl.removeChild(Tr)
+        })
+        //修改当前tr中的内容
+        obut1.type = "button";
+        obut1.value = "修改";
+        obut1.style.width = "50px";
+        obut1.style.marginRight = "-1px";
+        obut1.addEventListener("click",function(){
+            let P1 = document.getElementById("p1")
+            //调入弹窗遮罩
+            popup(250, 250, "6px solid green", "white", true, true);
+            P1.innerText = "修改人员信息"//修改按钮的文字
+            oBtn.value = "修改"//修改按钮的文字
+            
+            
+            // console.log(this.parentNode.parentNode)
+            obut1.onclick = function(){
+                let oldTr = this.parentNode.parentNode
+               oTbl.replaceChild(Tr,oldTr)
+           }
+        })
+        //凭借按钮删除修改
+        aTd.appendChild(obut);
+        aTd.appendChild(obut1);
+        //拼接tr
+        Tr.appendChild(nameTd);
+        Tr.appendChild(ageTd);
+        Tr.appendChild(wagesTd);
+        Tr.appendChild(aTd);
+        oTbl.appendChild(Tr)
+    }
+  
+
+    function popup(width, height, border, backgroundColor, havemask, dragable){
+        //创建两个新元素
+        //弹窗
+        let oPopup = document.getElementById("idcare");
+        
+        // oPopup.innerHTML = `姓名:<input/><br/>年龄:<input/><br/>薪资:<input/><br/><input type="button" value="提交"/>`
+        //遮罩
+        let oMask = document.createElement("div");
+
+        //获取页面视窗宽高+兼容
+        let bossWidth = document.documentElement.clientWidth || document.body.clientWidth
+        let bossHeight = document.documentElement.clientHeight || document.body.clientHeight
+        
+        //给弹窗添加样式
+        oPopup.style.position = "fixed";
+        oPopup.style.border = border;
+        oPopup.style.width = `${width}px`;
+        oPopup.style.height =`${height}px`;
+        oPopup.style.backgroundColor = `${backgroundColor}`
+        oPopup.style.textAlign = "center"
+
+        //设置弹窗居中
+        oPopup.style.left = `${(bossWidth - width) / 2}px`
+        oPopup.style.top = `${(bossHeight - height) / 2-100}px`
+
+        //设置弹窗随视窗居中
+        window.addEventListener("resize", () => {
+          let bossWidth = document.documentElement.clientWidth || document.body.clientWidth
+          let bossHeight = document.documentElement.clientHeight || document.body.clientHeight
+          oPopup.style.left = `${(bossWidth - width) / 2}px`
+          oPopup.style.top = `${(bossHeight - height) / 2-100}px`
+        })
+
+        // oPopup.setAttribute('class','popup1');
+        //给遮罩添加样式
+          oMask.style.position = "fixed";
+          oMask.style.width = "100%";
+          oMask.style.height = "100%";
+          oMask.style.left = 0;
+          oMask.style.top = 0;
+          oMask.style.backgroundColor = "rgba(0, 0, 0, .2)";
+        // oMask.setAttribute('class','mask')
+        //添加给Document
+        document.body.appendChild(oMask);
+        document.body.appendChild(oPopup);
+        //调用拖曳函数
+    }
+
+</script>
+</html>

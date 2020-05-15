@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+		<button  id="newTable">生成表格</button>
+		<div id="table1"></div>
+	</body>
+	<script>
+		//获取生成表格按钮的元素
+		var newTable = document.getElementById("newTable");
+		//初始化方法
+		init();
+		//表头信息
+		var tableTitle=['编号','班级','人数','男生','女生'];
+		//表体信息
+		var tableDate= [
+							{ id: 1, name: "一班", num: 20, sexNan: 9 ,sexNv: 11},
+			                { id: 2, name: "二班", num: 32, sexNan: 14 ,sexNv: 18},
+			                { id: 3, name: "三班", num: 16, sexNan: 4 ,sexNv: 12},
+			                { id: 4, name: "四班", num: 22, sexNan: 15 ,sexNv: 7},
+			                { id: 6, name: "五班", num: 35, sexNan: 24 ,sexNv: 11},
+			                { id: 7, name: "六班", num: 41, sexNan: 29 ,sexNv: 12}
+			           ];
+		function init() {
+			//绑定点击事件
+			newTable.onclick = function() {
+				//声明一个空字符串
+				var data = "";
+				//给字符串添加table开始标签
+				data += " <table border='1' width='500px' height='300px'>";
+				data += " <tr>";
+				//循环表头信息
+				for(var i=0;i<tableTitle.length;i++){
+					data += "<th >";
+					data += tableTitle[i];
+					data += "</th >";
+				}
+				data += " </tr>";
+				//获取多少行数就循环多少次
+				for(var i = 0; i < tableDate.length; i++) {
+					//添加tr开始标签
+					data += " <tr align='center'>";
+					//获取多少列数就循环多少次
+					for(var key in tableDate[i]){
+						//添加td开始标签
+						data += "<td >";
+						//取得单元格的值
+						data += tableDate[i][key]
+						//添加td结束标签
+						data += "</td>";
+					}
+					//添加tr结束标签
+					data += "</tr>";
+				}
+				//添加table结束标签
+				data += "</table>";
+				//把这段html代码渲染进table1这个div中
+				document.getElementById("table1").innerHTML = data;
+			}
+		}
+	</script>
+
+</html>

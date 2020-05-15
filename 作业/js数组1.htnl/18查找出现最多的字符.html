@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let str = "abacbdafgbtbgbc"
+    let result = [];
+    function fn(str){
+        // debugger
+        // let Newarr = [...str]
+        let name = "";
+        let length =  0;
+         for(let i = 0; i < str.length; i++){
+           if(result[str[i]]){
+            result[str[i]] = result[str[i]]+1;
+           }else{
+               result[str[i]] = 1;
+           }
+        }
+        // debugger
+        for(let i in result){
+            if(result[i] > length){
+                length = result[i];
+                name = i;
+            }
+        }
+        return `${name}最多,出现了${length}次`
+    }
+    console.log(fn(str))
+</script>
+</html>

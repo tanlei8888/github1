@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+     function bindEvent(ele, type, callback, useCapture) {
+        //兼容标准浏览器 addEventlistener
+        if (ele.addEventListener) {
+          ele.addEventListener(type, callback, useCapture)
+          bindEvent = function (ele, type, callback, useCapture) {
+            ele.addEventListener(type, callback, useCapture)
+          }
+          //兼容IE低版本 attachEvent 事件+"on"
+        } else if (ele.attachEvent) {
+          ele.attachEvent("on" + type, callback)
+          bindEvent = function (ele, type, callback, useCapture) {
+            ele.attachEvent("on" + type, callback)
+          }
+        }
+      }
+      //需要使用var来兼容IE
+      var oUl = document.getElementById("container");
+      var aLi = oUl.getElementsByTagName("li");
+      for (var i = 0; i < aLi.length; i++) {
+          //立即执行函数解决问题
+        (function (i) {
+          bindEvent(aLi[i], "click", function () {
+            aLi[i].style.backgroundColor = "pink"
+          }, true)
+        }(i))
+      }
+</script>
+</html>

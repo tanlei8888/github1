@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            background-color: yellow;
+            position: absolute;
+            top: 200px;
+            left: 200px;
+        }
+        li{
+            width: 100px;
+            list-style: none;
+            background-color: gray;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <img src="../img/c1.png" alt="">
+    <ul>
+        <li draggable="true">111</li>
+        <li draggable="true">222</li>
+        <li draggable="true">333</li>
+    </ul>
+    <div>收集箱</div>
+</body>
+<script>
+    let oDiv = document.querySelector("div");
+    let aLi = document.querySelectorAll("li");
+    let oUl = document.querySelector("ul");
+    let oImg = document.querySelector("img")
+    console.log(oUl)
+    let remove;
+    for(let i = 0; i < aLi.length; i++){
+        aLi[i].addEventListener("dragstart",function(e){
+            aLi[i].style.backgroundColor = "pink"
+            remove = this
+            e.dataTransfer.setDragImage (oImg,10,10)
+            console.log(this)
+        })
+        aLi[i].addEventListener("drag", function () {
+          this.style.backgroundColor = "blue"
+        })
+        aLi[i].addEventListener("dragend",function(){
+            aLi[i].style.backgroundColor = "gray"
+        })
+    }
+    oDiv.addEventListener("dragenter",function(){
+        this.style.backgroundColor = "orange";
+    })
+    // 拖曳对象悬停到div中 常态
+    //默认不给放 但是如果悬停到他的上方 如果你阻止默认事件触发的话 那么我就可以丢到这个位置
+    oDiv.addEventListener("dragover",function(e){
+        e.preventDefault()
+    })
+    oDiv.addEventListener("dragleave",function(){
+        this.style.backgroundColor = "yellow"
+    })
+    oDiv.addEventListener("drop",function(){
+        
+        console.log(oUl.removeChild(remove))
+    })
+</script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      let str = "abcddcba";
+      console.log(str.replace("b", "*")) //(a,b) 用b替换字符串里的第一个a
+      console.log(str.replace(/b/, "*")) //(a,b) 用b替换字符串里的第一个a
+      console.log(str.replace(/b/g, "*")) //替换掉所所有的a
+      
+      let str1 = "张三,李四,王五,老六,葫芦娃"
+      let reg = /\d+/g
+      let reg2 = /[\u4e00-\u9fa5·]+/g
+      console.log(str1.replace(reg2, (e) => e + "真牛逼"))//张三真牛逼,李四真牛逼,王五真牛逼,老六真牛逼,葫芦娃真牛逼
+
+      let str2 = "2,4,6,8";
+      console.log(str2.replace(reg, (e) => e * e))//4,16,36,64
+    </script>
+  </body>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox">
+    <input type="checkbox">
+    <input type="checkbox">
+    <input type="checkbox">
+    <input type="checkbox">
+    <button id="onc">反选</button>
+
+</body>
+<script>
+    let oBut = document.getElementById("onc")
+    let oInput = document.getElementsByTagName("input")
+    oBut.onclick = function(){
+        for(let i = 0;i<oInput.length;i++){
+            if(oInput[i].checked ){
+                oInput[i].checked = false;
+            }else{
+                oInput[i].checked = true;
+            }
+            console.log(i)
+        }
+    }
+</script>
+</html>

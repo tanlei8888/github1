@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //去重该数组中所有的 n [0, 1, 100, 0, 20, 90, 10, 10, 100, 0, 20, 0],
+    //  n=100 => [0, 1, 0, 20, 90, 10, 10, 0, 20, 0]
+     let arr = [0, 1, 100, 0, 20, 90, 10, 10, 100, 0, 20, 0]
+    function fn (arr){
+        for(let i = 0; i < arr.length; i++){
+                let n = 100;
+                if(arr[i] === n){
+                 arr.splice(i,1)
+                }
+        }   return arr
+    }
+   console.log(fn(arr))
+
+
+// //    传统去重
+// function fn1 (arr){
+//         for(let i = 0; i < arr.length; i++){
+//                 let n = 100;
+//                 let newArr = arr.sort()
+//                 if(newArr[i] === n){
+//                  newArr.pop(i)
+//                 }
+//            }   return arr
+//     }
+//    console.log(fn1(arr))
+</script>
+</html>

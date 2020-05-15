@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <form action="">
+        账号:<input type="text" value="" name="usename"> 6-12位字母及数字
+        <br/>
+        密码:<input type="text" value="" name="pasword"> 6-18位字母及数字
+        <br/>
+        <!-- <input type="button" value="登录" id="btn"> -->
+        <input type="submit" value="登录" id="btn">
+   </form>
+</body>
+<script>
+    let oForm = document.querySelector("form");
+    let oBtn = document.getElementById("btn");
+    let aInput = document.querySelectorAll("input");
+    let usereg = /^\w{6,12}$/i;
+    let pswreg = /^\w{6,16}$/;
+    location.username
+    oBtn.addEventListener("click",()=>{
+        if(usereg.test(aInput[0].value) && pswreg.test(aInput[1].value)){
+            //生成历史记录
+            // location.assign("2denglu.html")
+            oForm.action = '2denglu.html'
+        }else{
+            alert("请输入正确格式用户名及密码")
+        }
+    })
+
+
+</script>
+</html>

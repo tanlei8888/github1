@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        #canvas{
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400">
+        不支持canvas的浏览器
+    </canvas>
+</body>
+<script>
+    let canvas = document.querySelector("#canvas");
+    console.log(canvas);
+    //为canvas创建一个画布环境 画笔
+    let oGc = canvas.getContext("2d");
+    //实心矩形
+    oGc.fillRect(50,50,100,200)
+    //空心矩形(x,y,width,height)
+    oGc.strokeRect(50.5, 50.5, 100, 200) 
+    //更换实心颜色 先绘制在生成 两行代码位置不能交换
+    oGc.fillStyle = "red"
+    oGc.fillRect(50.5,300,100,100)
+    //画笔宽度
+    oGc.lineWidth = 10
+    //更换边框颜色 也必须先绘制才生成 两行代码位置不能交换
+    oGc.strokeStyle = "yellow"
+    //两条线折角处  round是圆角 bevel是尖角
+    // oGc.lineJoin = "bevel"
+    oGc.lineJoin = "round"
+    oGc.strokeRect(200.5, 50.5, 100, 100) 
+
+</script>
+</html>

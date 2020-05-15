@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="throttle">节流</button>
+</body>
+<script>
+    let oThrottle = document.querySelector("#throttle");
+    oThrottle.addEventListener("click",throttle(show,false,3000))
+   //节流,冷却函数
+    function throttle(cb,flag,delay) {
+        return function(){
+            //如果传参flag为true,进入节流.冷却
+            if(flag){
+                cb();
+            flag = !flag
+            setTimeout(() => {
+                //定时器完成后才让flag为true 才可以进行点击回调cb函数()
+                flag = !flag
+            }, delay);
+            }else{               //否则照常点击
+                cb();
+            }
+        }
+    }
+    function show(){
+        console.log("click")
+    }
+</script>
+</html>

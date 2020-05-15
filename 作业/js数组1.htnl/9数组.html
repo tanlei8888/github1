@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+  // 3 查询有多少个 char 有就返回下标数组 Array[1, 2, 3, 7] 没有就返回 []
+  function findall(arr, nmb) {
+   //声明一个空数组，用来装索引。
+   var results = [];
+   //声明步骤从数组0开始找
+   var item = 0;
+   //如果步骤没有越界就执行循环
+   while(item < arr.length) {
+    //去a数组里面找str这个字符串，记录下标
+    item = arr.indexOf(nmb, item);
+    //如果下标等于-1说明没有找到就推出循环
+    if(item === -1) {
+     break;
+    }else{
+     //如果找到就把下标存进数组
+     results.push(item);
+     //并从下个位置开始搜索
+     item++;
+    }
+   }
+   return results;
+  }
+  var arr = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 5, 4, 3, 2, 1];
+  
+  console.log(findall(arr, 9))
+ </script>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body>
+</body>
+<script src="./js/shake.js"></script>
+<script>
+    let maxWidth = document.documentElement.clientWidth;
+    let maxHeigt = document.documentElement.clientHeight;
+    let arr = [];
+    let time;
+    let speed = 20;
+    let imgbox = ["../heiren1.jpg","../heiren2.jpg","../heiren3.jpg","../heiren4.jpg","../heiren5.jpg"];
+    let iNow = 0;
+    let times = setInterval(() => {
+        if(arr.length < 5){
+            new Shake(maxWidth,maxHeigt,arr,time,speed,imgbox,iNow);
+            iNow++;
+        }else{
+            clearInterval(times);
+        }
+    }, 2000);
+    
+    // time = setInterval(() => {
+    //     //定时器生产泡泡
+    //     let oDiv = document.createElement("div");
+    //     document.body.appendChild(oDiv);
+    //     // debugger
+    //     arr.push(oDiv);
+    //     oDiv.style.height = 100 + "px";
+    //     oDiv.style.width = 100 + "px";
+    //     oDiv.style.backgroundColor = "red";
+    //     oDiv.style.borderRadius = "50%";
+    //     oDiv.style.position = "absolute";
+    //     oDiv.style.left = parseInt(Math.random()*(maxWidth - 100)) + "px";
+    //     oDiv.style.top = parseInt(Math.random()*(maxHeigt - 100)) + "px";
+    //     if(arr.length > 5){
+    //         clearInterval(time);
+    //     }
+    //     change()
+    // }, 2000);
+    // function change(){
+    //     debugger
+    //     let a = true;
+    //     let oLeft = oDiv.offsetWidth;
+    //     let oTop = oDiv.offsetHeight;
+    //     setInterval(() => {
+    //         // debugger
+    //         if(a){
+    //             oDiv.style.left = oLeft + speed + "px";
+    //             oDiv.style.top = oTop + speed + "px";
+    //             a = !a
+    //         }else{
+    //             oDiv.style.left = oLeft - speed + "px";
+    //             oDiv.style.top = oTop - speed + "px";
+    //             a = true
+    //         }
+    //     }, 100);
+    // }
+    
+
+    
+</script>
+</html>

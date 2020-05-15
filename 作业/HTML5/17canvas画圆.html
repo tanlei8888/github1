@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+          background-color: #000;
+        }
+  
+        #canvas {
+          background-color: #fff;
+        }
+      </style>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+</body>
+<script>
+    let canvas = document.querySelector("#canvas")
+      //为canvas设定一个绘制环境 (是画笔)
+      let context = canvas.getContext("2d");
+      //弧度 = 角度 * Math.PI / 180
+      //特别的 如果 360度 整个圆的周长 C = 2πr
+      context.arc(200,200,100,Math.PI/180*0,Math.PI/180*360,false)
+      context.stroke()
+</script>
+</html>

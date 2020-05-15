@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./chartcss/Chart.css">
+</head>
+<body>
+    <canvas id="myChart" width="400" height="400"></canvas>
+</body>
+<script src="./chratJs/Chart.js"></script>
+<script>
+    var ctx = document.getElementById("myChart");
+    var myRadarChart = new Chart(ctx, {
+    type: "radar",
+    data: {
+    labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
+    datasets: [{
+        data: [20, 10, 4, 2]
+    }]
+},
+    options: options
+});
+var options = {
+    scale: {
+        // Hides the scale
+        display: false
+    }
+};
+
+</script>
+</html>

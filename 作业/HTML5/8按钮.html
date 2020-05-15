@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn{
+            width: 60px;
+            height: 30px;
+            margin: 50px auto;
+            text-align: center;
+            border: 1px solid black;
+            border-radius: 8px;
+            position: relative;
+        }
+        .hidden{
+            width: 100%;
+            height: 0;
+            bottom: 0;
+            border-radius: 8px;
+            position: absolute;
+            background-color: #e3e3e3;
+            transition: all .5s;
+        }
+        .words{
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            z-index: 100;
+            position: absolute;
+        }
+        .btn:hover .hidden{
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn">
+        <div id="hidden" class="hidden"></div>
+        <div class="words">搜索</div>
+      </div>
+</body>
+</html>

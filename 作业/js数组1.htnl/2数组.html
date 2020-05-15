@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 2 查询有多少个 char 有就返回个数 Number 没有就返回 0
+    let numarr = [2,3,5,2,9,3,7,2];
+    
+    function fun (arr,a){
+        let j = 0;
+        // debugger
+        for(let i = 0; i < arr.length; i++ ){
+           if( arr[i] === a){
+               j++;
+           }
+        }     return j
+    }
+    console.log(fun(numarr,2)) 
+
+   
+    
+    function fun1 (arr,a){
+        let item = 0;
+        let i = 0;
+        // debugger
+        while(i < arr.length){
+            if(arr[i] === a){
+                item++;
+            }
+            i++; 
+        }   return item;
+    }    
+    console.log(fun1(numarr,2)) 
+
+</script>
+</html>

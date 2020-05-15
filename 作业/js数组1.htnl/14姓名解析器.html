@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let str = "JACK MA"
+    function fn (str){
+     let str2 = str.substring(0,1).toUpperCase();
+     let str3 = str.substring(1,str.indexOf(" ")).toLowerCase();
+     let str4 = str.substring(str.indexOf(" ")).toUpperCase();
+     return str2 + str3 +str4
+    }
+    console.log(fn("JACK MA"))
+    console.log(fn("jack chen"))
+
+
+//方法二
+
+    let fn1 = str => (str.substring(0,1).toUpperCase() +
+     str.substring(1,str.indexOf(" ")).toLowerCase()+
+      str.substring(str.indexOf(" ")).toUpperCase())
+    console.log(fn1(str))
+
+</script>
+</html>

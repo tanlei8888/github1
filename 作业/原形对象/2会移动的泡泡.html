@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            width: 1000px;
+            height: 600px;
+            margin: auto;
+            border: 5px solid skyblue;
+            position: relative;
+            background-color: rgba(23, 97, 93, .1 );
+        }
+        .container .pp{
+            width: 100px;
+            height: 100px;
+            border: 5px solid #f2ff2f;
+            background-color: #04ff0024;
+            position: absolute;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+    </div>
+</body>
+<script src="./js/paopao.js"></script>
+<script>
+    let oContainer = document.getElementById("container");
+    let time = 50;
+    let speedLeft = 10;
+    let speedTop = 10;
+    let arr = [];
+    setInterval(() => { 
+        // debugger
+        if(arr.length < 10){
+            new Creatpp(oContainer,time,speedLeft,speedTop,arr);
+        }
+    }, 3000);
+        
+    // let oContainer = document.querySelector("#container");
+    // let oRound = document.querySelector("#pp");
+    // //获取可移动的距离
+    // let cLeft = oContainer.clientWidth - oRound.clientWidth;
+    // let cTop = oContainer.clientHeight - oRound.clientHeight;
+    // //必须声明两个移动变量 否者原路返回
+    // // debugger
+    // let speedLeft = 5;
+    // let speedTop = 5;
+    // //获取移动坐标
+    // setInterval(() => {
+    //     let oLeft = oRound.offsetLeft + speedLeft;
+    //     let oTop = oRound.offsetTop + speedTop;
+    //     let x = parseInt(Math.random()*oLeft)
+    //     if(oLeft >= cLeft){
+    //         //圆形的x坐标变为container的宽度-自身宽度,+改为-
+    //         oLeft = cLeft
+    //         speedLeft = -speedLeft;
+    //     }else if(oLeft <= 0){
+    //         oLeft = 0;
+    //         speedLeft = -speedLeft;
+    //     }
+    //     if( oTop >= cTop){
+    //          //圆形的Y坐标变为container的高度-自身高度,+改为-
+    //         oTop = cTop;
+    //         speedTop = -speedTop;
+    //     }else if(oTop <= 0){
+    //         oTop = 0;
+    //         speedTop = -speedTop;
+    //     }
+    //     oRound.style.left  = oLeft + "px";
+    //     oRound.style.top = oTop + "px";
+    // }, 17);
+
+    
+
+
+   
+    
+    
+    
+
+ 
+</script>
+</html>

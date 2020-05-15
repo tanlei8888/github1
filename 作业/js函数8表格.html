@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="trs">
+    <input type="text" name="" id="tds">
+    <input type="button" id="btn" value="生成表格">
+    <div id="container"></div>
+</body>
+<script>
+    let oBtn = document.getElementById("btn")
+    oBtn.onclick = function(){
+        debugger
+    let aTrs = Number(document.getElementById("trs").value)
+    let aTds = Number(document.getElementById("tds").value)
+    let oDiv = document.getElementById("container")
+    let data = ""
+    data += " <table border='1' width='500px' height='300px'>";
+        for(let i = 1; i <= aTrs; i++){
+            data += " <tr>";
+            for(let j = 1; j <= aTds; j++){
+                data += "<td >";
+                data += "</td>";
+            }
+            data += "</tr>";
+        }
+    data += "</table>";
+        oDiv.innerHTML = data
+    }
+</script>
+</html>

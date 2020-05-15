@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: pink;
+        }
+        .taiji{
+            width: 200px;
+            height: 400px;
+            margin: auto;
+            background-color: white;
+            border-radius: 50%;
+            border-left: 200px solid black;
+            transition: 0.5s;
+        }
+        .taiji::after,.taiji::before{
+            content: "";
+            display: block;
+            width: 50px;
+            height: 50px;
+            /* margin-left: -100px; */
+            background-color: pink;
+            border-radius: 50%;
+        }
+        .taiji::before{
+            margin-left: -50%;
+            background-color: white;
+            border:75px solid black;
+        }
+        .taiji::after{
+            background-color: black;
+            border: 75px solid white;
+            margin-left: -50%;
+        }
+        .taiji:hover{
+            transform: translateX(100px) translateY(100PX) rotate(360deg) ;
+        }
+    </style>
+</head>
+<body>
+    <div class="taiji"></div>    
+</body>
+
+</html>

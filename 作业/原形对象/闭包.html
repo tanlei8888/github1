@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function fn1(){
+        let a = 1;
+        function fn2(){
+            console.log(a)
+            a++;
+        }
+        return fn2;
+    }
+    let myfn = fn1();
+    myfn();//1
+    myfn();//2
+    fn1()();//1
+    let myfn1 = fn1();
+    myfn1();//1
+    myfn1();//2
+    fn1()();//1
+
+    function fn2(num){
+        // function fn3(){
+        //     num++;
+        //     console.log(num);
+        // }
+        // return fn3
+        function fn4(num1){
+            num--;
+            console.log(num + num1)
+        }
+        return fn4
+    }
+    // let myfn3 = fn2(10);
+    // myfn3();//11
+    // myfn3();//12
+    // myfn3();//13
+    // debugger
+    fn2(10)();//11
+    fn2(11)();//12
+    fn2(12)()//13
+    let myfn4 = fn2(10);
+    myfn4(1);//10
+    myfn4(2);//10
+    fn2(10)(1)//10
+    
+
+    function fun(n, i) {
+        // debugger
+        console.log(i)
+        return {
+          fun: function (m) {
+            return fun(m, n)
+          }
+        }
+      }
+
+      let a = fun(0) //undefined
+      a.fun(1) //0
+      a.fun(2) //0
+      a.fun(3) //0
+
+      let b = fun(0) //undefined
+        .fun(1) //0
+        .fun(2) //1
+        .fun(3) //2
+
+      let c = fun(0).fun(1) //undefined 0
+      c.fun(2) //1
+      c.fun(3) //1
+</script>
+</html>

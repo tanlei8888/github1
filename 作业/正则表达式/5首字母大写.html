@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      let str = "hooray snowing time to make a snowman"
+      let reg = /\b\w/g
+      console.log(str.replace(reg, e => e.toUpperCase()))
+
+
+      let reg1 = /\b(\w)\w*/g
+      console.log(str.replace(reg1, (match, ...part) => {
+        // console.log(match)
+        return part[0].toUpperCase() + match.slice(1)
+      }))
+    </script>
+  </body>
+
+</html>

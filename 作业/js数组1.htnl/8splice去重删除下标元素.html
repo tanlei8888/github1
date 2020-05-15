@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 去重该数组中所有的 0 [0, 1, 100, 0, 20, 90, 10, 10, 100, 0, 20, 0]
+    //  => [1, 100, 20, 90, 10, 10, 100, 20]
+    let arr = [0, 1, 100, 0, 20, 90, 10, 10, 100, 0, 20, 0]
+    function fn (arr){
+        // debugger
+        for(let i = 0; i < arr.length; i++){
+            for( let j = i+1; j < arr.length ; j++){
+                if(arr[i] === arr[j]){
+                 arr.splice(j,1,)
+                //  splice可删除下标,可插入下标
+                 j--;
+                }
+               
+            }
+        }   return arr
+    }
+   console.log(fn(arr))
+</script>
+</html>

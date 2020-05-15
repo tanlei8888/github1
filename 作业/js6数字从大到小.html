@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+    <input type="text" id="txt1">
+    <input type="text" id="txt2">
+    <input type="button" name="" id="btn" value="提交">
+    <div id="result"></div>
+</body>
+<script>
+    let oBtn = document.getElementById("btn")
+    let oTxt = document.getElementById("txt")
+    let aTxt = document.getElementById("txt1")
+    let bTxt = document.getElementById("txt2")
+    let oDiv = document.getElementById("result")
+    oBtn.onclick = function(){
+        let a = +oTxt.value;
+        let b = +aTxt.value;
+        let c = +bTxt.value;
+        let t ;
+        if(a<b){
+            [a,b]=[b,a]
+        }
+        if(a<c){
+            [a,c]=[c,a]
+        } 
+        if(b<c){
+            [b,c]=[c,b]
+        }
+    oDiv.innerHTML= `${a}${b}${c}`
+
+  
+        
+}
+ 
+
+</script>
+</html>

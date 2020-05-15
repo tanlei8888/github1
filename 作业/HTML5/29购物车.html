@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="-" id="jian">
+    <input type="text" id="result">
+    <input type="button" name="" id="jia" value="+">
+</body>
+    <script>
+        let btn = document.querySelector("#jian");
+        let result = document.querySelector("#result");
+        let btn1 = document.querySelector("#jia");
+        //获取打开初始化的值 get
+        result.value = localStorage.getItem("result") || 0
+        btn.addEventListener("click",function(){
+            result.value = Number.parseInt(result.value) -1
+            //本地储存result.value set
+            localStorage.setItem("result",result.value)
+        })
+        btn1.addEventListener("click",function(){
+            result.value = Number.parseInt(result.value) +1
+            localStorage.setItem("result",result.value)
+        })
+    </script>
+</html>

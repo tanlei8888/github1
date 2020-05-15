@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let arr = [1,[3,[5,7],9],11];
+    function oldArr(arr){
+        let newArr = [];
+        arr.forEach((e,i) => {
+            if(arr[i] instanceof Array){
+                newArr.push(oldArr(arr[i]));
+            }else{
+                newArr.push(arr[i])
+            }
+        });
+        return newArr
+    }
+    // console.log(oldArr(arr));
+    let arr2 = oldArr(arr);
+    console.log(arr === arr2);
+    console.log(arr);
+    console.log(arr2);
+</script>
+</html>

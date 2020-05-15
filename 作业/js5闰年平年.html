@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="txt">
+    <input type="button" name="" id="btn" value="确认">
+    <div id="result"></div>
+</body>
+<script>
+    let oTxt = document.getElementById("txt")
+    let oBtn = document.getElementById("btn")
+    let oDiv = document.getElementById("result")
+    oBtn.onclick = function(){
+        let val = +oTxt.value;
+        // if(val%4==0){
+        //     oDiv.innerHTML = "闰年"
+        // }else{
+        //     oDiv.innerHTML = "平年"
+        // }
+        oDiv.innerHTML = val%4 === 0 ?"闰年":"平年"
+    }
+</script>
+</html>
