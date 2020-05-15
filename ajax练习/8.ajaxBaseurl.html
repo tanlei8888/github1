@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./js/jquery-1.11.1.js"></script>
+    <script src="./js/axios.js"></script>
+    <script>
+        //设置所有请求的baseURL
+        axios.defaults.baseURL = 'http://127.0.0.1:8080/ajax练习/'
+        //设置content-type 默认的表单格式
+        axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+        
+        axios({
+            method:'get',
+            url:'js/getNews.php',
+            params:{username:666,age:777}
+        }).then(function(res){
+            console.log(res.data)
+        })
+
+        axios({
+            method:'get',
+            url:'js/1.get.php',
+            params:{username:1111,age:2222}
+        }).then(function(res){
+            console.log(res.data)
+        })
+    </script>
+</body>
+</html>

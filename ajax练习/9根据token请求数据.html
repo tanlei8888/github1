@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        <input type="text" id='text' />
+        <input type="button" id='btn' value='登录' />
+        <input type="button" id='out' value='退出' />
+    </div>
+    <ul id='content'></ul>
+    <script src="./js/jquery-1.11.1.js"></script>
+    <script src="./js/axios.js"></script>
+    <script>
+        let oBtn = document.getElementById("btn");
+        let oText = document.getElementById("text");
+        let oUl = document.getElementById("content");
+        let oDel = document.getElementById("out")
+
+        let token = localStorage.getItem("token")
+
+         //如果登录成功过 直接显示数据
+
+         if(token){
+            render(JSON.pase(localStorage.getItem('userData')))
+        }
+        //退出登录
+        oDel.onclick = function(){
+            localStorage.removeItem("token")
+            location.reload()
+        }
+       
+
+        //登录获取数据
+        oBtn.onclick = function(){
+            axios({
+                method:"get",
+                url:'https://api.github.com/user/repos',
+                headers:{'Authorization':'token' + oText.value}
+            }).then(function(res){
+                localStorage.setItem('token',oText.value);
+                localStorage.setItem('userData',JSON.stringify(res.data));
+                console.log(res.data)
+                render(res.data)
+            })
+        }
+
+        function render(arr){
+            arr.forEach(element => {
+                 oUl.innerHTML += `<li>${item.name}</li>`
+            });
+
+        }
+    </script>
+</body>
+</html>

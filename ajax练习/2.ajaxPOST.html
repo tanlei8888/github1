@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //创建一个异步对象
+        let xhr = new XMLHttpRequest();
+        //确定请求方式和URL地址
+        xhr.open('POST','js/1.post.php')
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        //发送请求正文
+        xhr.send('username=袁春发&age=23');
+        //监听事件
+        xhr.onreadystatechange = function(){
+            //如果请求完成
+            if(xhr.readyState === 4){
+                //请求成功
+                if( xhr.status === 200){
+                    //服务器响应的结果 TEXT形式的
+                    console.log(xhr.responseText)
+                }
+            }
+        }
+    </script>
+</body>
+</html>

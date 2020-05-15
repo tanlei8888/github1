@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./js/jquery-1.11.1.js"></script>
+    <script src="./js/axios.js"></script>
+    <script>
+        //axios的post传递参数，这个参数在浏览器环境下，不能直接填写JSon对象
+        // axios.post('js/1.post.php',{
+        //     username:'jj',
+        //     age:666
+        // }).then(function(res){
+        //     console.log(res.data)
+        // }) // null
+        //axios的post发送参数，可以填写序列化字符串作为参数
+        //如何把JSON对象转换成序列化对象？可以自己封装
+        //在Vue内需要下载一个Qs插件来进行JSON对象到序列化字符串的装换
+
+        //可以使用原生序列化对象传参
+        // axios.post('js/1.post.php','username=jj&age=666').then(function(res){
+        //     console.log(res.data)
+        // }) // jj 666
+
+        //请求1
+        function getUserAccount () {
+            return axios.get('js/1.get.php')
+        }
+        //请求2 
+        function getUserPermissions(){
+            return axios.get('js/getlist.php')
+        }
+        //同时开启请求1和请求2，两格请求都完成时统一触发统一的回调
+        axios.all([getUserAccount(),getUserPermissions()])
+        .then(axios.spread(function(acct,perms){
+            console.log(acct)
+            console.log(perms)
+        }))
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./js/jquery-1.11.1.js"></script>
+    <script src="./js/axios.js"></script>
+    <script>
+        $.ajax({
+            type:'get',
+            url:'js/1.get.php',
+            success:function(res){
+                console.log(res)
+            }
+        })
+        
+
+        //axios 请求数据陈宫的回调需要写现在then内。
+        //then的回调函数的形参就是axios的响应结构。
+        //catch就是请求失败的回调函数
+        //axios的响应结构就是data属性才是服务器返回的结果
+
+        axios({
+            method:'get',
+            url:'js/1.get.php'
+        }).then(function(res){
+            console.log(res.data)
+        }).catch(function(error){
+            console.log(error)
+        })
+        
+        //get 请求简写
+        axios.get('js/1.get.php',{params:{
+            username:'jj',
+            age:666
+        }}).then(function(res){
+            console.log(res)
+            console.log(res.data)
+        })
+    </script>
+</body>
+</html>
