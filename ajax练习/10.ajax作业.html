@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #login {
+            width: 500px;
+            margin: auto;
+            text-align: center;
+            box-shadow: 0 0 10px #000;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            margin-left: -250px;
+            margin-top: -100px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .item {
+            padding-top: 20px;
+        }
+
+        [type='text'] {
+            width: 450px;
+            height: 30px;
+        }
+
+        [type='button'] {
+            width: 150px;
+            height: 30px;
+            background-color: limegreen;
+            border: none;
+            cursor: pointer;
+            outline-style: none;
+        }
+
+        .title>li {
+            text-align: center;
+            background: #f5f5f5;
+            border: 1px solid #eeeeee;
+            line-height: 50px;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+
+        .title>li:hover {
+            background: #fafafa;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login" class="container">
+        <h3>请登录</h3>
+        <div class="formData">
+            <div class="itme">
+                <input type="text" class="token" placeholder="token">
+            </div>
+            <div class="item">
+                <input type="button" value="登录">
+                <input type="button" value="关闭">
+            </div>
+        </div>
+
+    </div>
+    <div class="content">
+        <input type="button" value="刷新">
+        <input type="button" value="退出">
+        <ul class="title">
+
+        </ul>
+    </div>
+    <script src="./js/jquery-1.11.1.js"></script>
+    <script src="./js/axios.js"></script>
+    <script>
+        $(function () {
+            let token = localStorage.getItem('token');
+            //登录
+            $('[vlue="登录"]').on('click', function () {
+                token = $('.token').val();
+            })
+
+            function getData() {
+                return axios.get(url).then(function (res) {
+                    localStorage.setItem('pageData', JSON.stringify(res.getData))
+
+                })
+            }
+            function showData(data){
+                data.forEach(element => {
+                    let oLi = $(`<li>${element.name}</li>`);
+                    $(".title").append(oLi)
+
+                    let oUl = $(`ul class='childrenList'></ul>`)
+
+                    let arr = Object.entries(element)
+                    // arr.forEach(function())
+                });
+            }
+        })
+
+
+
+    </script>
+</body>
+
+</html>
