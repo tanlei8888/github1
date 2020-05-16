@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #login {
+            width: 500px;
+            margin: auto;
+            text-align: center;
+            box-shadow: 0 0 10px #000;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            margin-left: -250px;
+            margin-top: -100px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .item {
+            padding-top: 20px;
+        }
+
+        [type='text'] {
+            width: 450px;
+            height: 30px;
+        }
+
+        [type='button'] {
+            width: 150px;
+            height: 30px;
+            background-color: limegreen;
+            border: none;
+            cursor: pointer;
+            outline-style: none;
+        }
+
+        .title>li {
+            text-align: center;
+            background: #f5f5f5;
+            border: 1px solid #eeeeee;
+            line-height: 50px;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+
+        .title>li:hover {
+            background: #fafafa;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login" class="container">
+        <h3>请登录</h3>
+        <div class="formData">
+            <div class="itme">
+                <input type="text" class="token" placeholder="token">
+            </div>
+            <div class="item">
+                <input type="button" value="登录">
+                <input type="button" value="关闭">
+            </div>
+        </div>
+
+    </div>
+    <div class="content">
+        <input type="button" value="刷新">
+        <input type="button" value="退出">
+        <ul class="title">
+
+        </ul>
+    </div>
+    <script src="./js/jquery-1.11.1.js"></script>
+    <script src="./js/axios.js"></script>
+    <script>
+        $(function () {
+            let token = localStorage.getItem('token');
+            //全局配置
+            axiosInit()
+
+            //判断是否登陆过
+            isLogin(token)
+
+            //登录
+            $('[value="登录"]').on('click', function () {
+                //获取输入框的token
+                token = $('.token').val();
+
+                //请求个人账号数据
+                getUserInfo('users/DamnAmazing')
+
+                //根据token请求个人项目数据
+                getData('user/repos').then(function(){
+                    //把token、存储到本地储存。用于判断是否已经登录
+                    localStorage.setItem("token",token)
+                    //隐藏登录窗口
+                    $("#login").hide()
+                    //显示信息页
+                    $("#content").show()
+                })
+            })
+    
+            // console.log($('[vlue="登录"]'))
+            //请求项目数据封装
+            //登录和刷新时需要请求
+            //两次数据请求都需要存数据到本地储存和SHOWData渲染视窗，因此做了封装
+            function getData(url) {
+                return axios.get(url).then((res)=> {
+                    //把页面数据储存到本地储存
+                    localStorage.setItem('pageData', JSON.stringify(res.data))
+                    //根据请求到的数据渲染信息页
+                    showData(res.data)
+                })
+            }
+
+            //请求个人数据
+            function getUserInfo(url){
+                return axios.get(url).then((res)=>{
+                    $('#content').find('h3').find('span').text(res.data.login)
+                })
+            }
+            //axios全局配置
+            function axiosInit(){
+                //全局的baseURL
+                axios.defaults.baseUrl = 'https://api.github.com/'
+                //全局ajax拦截，封装相同的请求逻辑
+                axios.interceptors.request.use(function(config){
+                    //如果本地储存又token，默认放入headers，这样每次请求都会自动添加到headers
+                    if(token){
+                        config.headers['Authorization'] = 'token' + token;
+                    }
+                    //返回config配置 也必须retrun
+                    return config
+                },function(error){
+                    //请求错误做些什么
+                    return Promise.reject(error)
+                })
+                //全局响应拦截器
+                axios.interceptors.response.use(function(response){
+                    //全局响应，同椅做数据渲染，不过不推荐写在这里，因为渲染页面是同步的，
+                    //会卡数据请求流程很久
+
+                    //对响应数据做些什么
+                    //必须retrun 服务器响应的结果，否则then内拿不到res
+                    return response
+                },function(error){
+                    //对响应错误做点什么
+                    alert("出错了，token填对了吗")
+                    return Promise.reject(error)
+                })
+            }
+            //渲染数据到页面
+            function showData(data){
+                //根据请求到的数据（这里是数组），数据条数表示项目个数
+                //根据数据的长度插入相应个数的LI
+                data.forEach(function(element,i) {
+                    let oLi = $(`<li>${element.name}</li>`);
+                    $(".title").append(oLi)
+
+                    let oUl = $(`ul class='childrenList'></ul>`)
+                    //根据每个项目的数据，在oUl内再插入螺杆个li
+                    let arr = Object.entries(element)
+                    console.log(arr)
+                    arr.forEach(function([key,val],j){
+                        let oLi = $(`<li>${key}:${val}</li>`)
+                        oUl.append(oLi)
+                    })
+                    $('title').append(oUl)
+                });
+            }
+        })
+
+        //判断是否登录过
+        //如果已经登录过，则直接从本地储存获得数据
+        //如果没有登录过，直接显示登录页
+        function isLogin(token){
+            if(token){
+                //从跟本地储存获得数据，而不是重新请求
+                let data = JSON.parse(localStorage.getItem('pageData'))
+                //渲染数据
+                showData(data)
+                //显示页面
+                $('#content').show()
+            }else{
+                //没登录过就显示登录窗
+                $('#login').show()
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
