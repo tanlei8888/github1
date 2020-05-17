@@ -1,4 +1,5 @@
 $(function(){
+    //导航条
     $("#nav ul li").hover(function(){
         $(this).find(".navitem").stop().slideDown();
     },
@@ -16,15 +17,15 @@ $(function(){
       })
    
 
-    //轮播图
+    //轮播图----------------------------------------------------------------------------
     let vw = $(window).width()
     //当前图片下标
     let iNow = 0;
     var oNowImg=$("#navimg ul li").eq(iNow);
     //动画参数对象
     let imgMOve = {};
-     //节流防抖开关
-     let flag = true
+    //节流防抖开关
+    let flag = true
     //除了第一个li，其他全部移动到右边
     $("#navimg ul li").not(oNowImg).each(function () {
 		$(this).css("left",vw);
@@ -76,7 +77,6 @@ $(function(){
             console.log(iNow);
             //重新赋值iNow 记录上一张被切换的图片
             iNow = index
-            
        }
     })
     
@@ -135,7 +135,8 @@ $(function(){
     //li 宽度
     let sLeftW = $(".tab-img  li").width()
 
-    $(".tab-img.sLeft ul").width(sLeftW*$(".sLeft li").length);
+    $(".tab-img.sLeft ul").width(sLeftW*$(".tab-div.active .sLeft li").length);
+    // console.log($(".tab-div.active .sLeft li"))
     //开启定时器
     let timeT = setInterval(() => {
         tabImgMOve($boxTop,"marginTop")
@@ -143,14 +144,19 @@ $(function(){
     let timeL = setInterval(() => {
         tabImgMOve($boxLeft,"marginLeft")
     }, 2000);
-    
+    //选项卡
     $("#tab-wrap ul li").on("click",function () {
+        //标题样式
         $(this).addClass("active").siblings().removeClass("active")
+        //当前下标
         let index = $("#tab-wrap ul li").index($(this))
+        //淡入淡出
         $("#tab-c-wrap .tab-div").eq(index).fadeIn(500).siblings().fadeOut(500)
         $("#tab-c-wrap .tab-div").eq(index).addClass("active").siblings().removeClass("active")
+        //选中当前展示的item
         $boxTop = $(".tab-div.active").find(".sTop");
         $boxLeft = $(".tab-div.active").find(".sLeft");
+        //清除所有定时器
         clearInterval(timeT);
         clearInterval(timeL);		
 		timeT = setInterval(() => {
@@ -162,7 +168,7 @@ $(function(){
             tabImgMOve($boxLeft,"marginLeft")
         }, 2000);
     })
-
+    //鼠标进入Img
     $(".sTop").hover(function(){
 		    clearInterval(timeT);
         },function(){
@@ -180,18 +186,24 @@ $(function(){
             }, 2000);
         })
     
+    //轮播函数
     function tabImgMOve(ele,direction){
         if(ele !== null){
+            //当前展示的ul
             let boxUl =  ele.find("ul")
+            //储存样式
             let css = {}
             if(direction === "marginTop"){
                 css[direction] = -sTopH
                 boxUl.animate(css,500,function () {
+                    //动画结束 第一张插到容器最后一张 改变DOM
                     boxUl.find("li").eq(0).appendTo(boxUl);
+                    //此时第二张变为第一张 marginTop = 0，循环插入
                     boxUl.css(direction,0);
                 })
             }else{
                 css[direction] = -sLeftW
+                //延迟0.5s轮播
                 boxUl.delay(500).animate(css,500,function () {
                     boxUl.find("li").eq(0).appendTo(boxUl);
                     boxUl.css(direction,0);
@@ -202,6 +214,7 @@ $(function(){
         }
     }
     
+    //手风琴菜单-------------------------------------------------------------------------
     $("#con-item>ul>li").mouseover(function(){
         if($(this).next().hasClass("active")){
             return
@@ -210,4 +223,110 @@ $(function(){
         $(".item-con.active").stop().animate({"width":0},700).removeClass("active");
 		$(this).next().stop().animate({"width":620},700).addClass("active");
     })
+
+    //点击有喜------------------------------------------------------------------------
+    let timerBall = setInterval(() => {
+        scaleBall()
+    }, 1000);
+    let timerSuper;
+    let colorBox = ["skyblue","pink","purple","orange","Cyan","yellow"];
+    let colorBoxI = 0;
+    //点击惊喜
+    $("#greenball").click(function () {
+        clearInterval(timerSuper)
+        timerSuper = setInterval(() => {
+            scaleSpuer()
+        }, 2000);
+    })
+    //鼠标进入 出去
+    $("#greenball").hover(function () {
+        clearInterval(timerBall)
+      },function () {
+        timerBall = setInterval(() => {
+            scaleBall()
+        }, 1000);
+    })
+    //正中圆
+    function scaleBall() { 
+        $("#greenball").animate({
+            "width":250,
+            "height":250,
+            "marginLeft":-125,
+            "marginTop":-125,
+            "lineHeight":250
+        },1000).animate({
+            "width":150,
+            "height":150,
+            "marginLeft":-75,
+            "marginTop":-75,
+            "lineHeight":150
+        },1000,function () {
+            $(this).css("background",colorBox[colorBoxI%colorBox.length])
+          })
+        $("#shadowball").animate({
+            "width":350,
+            "height":350,
+            "marginLeft":-175,
+            "marginTop":-175,
+            "opacity":.3,
+            "borderWidth":0,
+        },2000,function () {
+            $("#shadowball").css({
+            "width":140,
+            "height":140,
+            "marginLeft":-76,
+            "marginTop":-76,
+            "opacity":1,
+            "borderWidth":6,
+            "borderColor":colorBox[colorBoxI%colorBox.length]
+            })
+          })
+          colorBoxI++
+    }
+    //左右圆
+    function scaleSpuer () {
+        $("#squb-L").animate({
+            "width": 250,
+            'height': 250,
+            // "marginLeft":-125,
+            "marginTop":-125,
+            'left':0,
+            'margin':0,
+            'lineHeight':250,
+            "fontSize":50
+        },1000).animate({
+            "width": 150,
+            'height': 150,
+            'left':'50%',
+            'top':'50%',
+            "marginLeft":-75,
+            "marginTop":-75,
+            'lineHeight':150,
+            "fontSize":20
+        },1000,function () {
+            $(this).css("backgroundColor",colorBox[colorBoxI%colorBox.length])
+          })
+        $("#squb-R").animate({
+            "width": 250,
+            'height': 250,
+            // "marginLeft":-125,
+            "marginTop":-125,
+            'left':'80%',
+            'margin':0,
+            'lineHeight':250,
+            "fontSize":50
+        },1000).animate({
+            "width": 150,
+            'height': 150,
+            'left':'50%',
+            'top':'50%',
+            "marginLeft":-75,
+            "marginTop":-75,
+            'lineHeight':150,
+            "fontSize":20
+        },1000,function () {
+            $(this).css("backgroundColor",colorBox[colorBoxI%colorBox.length])
+          })
+          colorBoxI++
+    }
 })

@@ -329,6 +329,7 @@
 			}
 			#greenball:hover{
 				background: #ffb005;
+				/* transform: scale(1.5); */
 			}
 			#shadowball{
 				background: #fff;
@@ -337,6 +338,7 @@
 				height: 140px;
 				margin-left: -76px;
 				margin-top:-76px;
+				
 			}
 			#footer{
 				width: 100%;
